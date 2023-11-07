@@ -18,7 +18,7 @@ interface IProps {
 
 export function Note({data}: IProps) {
     return(
-        <Container>
+        <Container to='/details/5'>
             <h1>{data.title}</h1>
 
             {

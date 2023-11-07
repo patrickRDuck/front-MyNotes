@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { IPropsTheme } from "../../styles/theme";
+import { Link } from 'react-router-dom'
 
-export const Container = styled.button<IPropsTheme>`
+export const Container = styled(Link)<IPropsTheme>`
     display: flex;
     flex-direction: column;
 
