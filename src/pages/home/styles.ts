@@ -40,6 +40,18 @@ export const Menu = styled.ul`
      grid-area: menu;
 
      padding-top: 64px;
+     padding-bottom: 32px;
+
+     height: 430px;
+     overflow: scroll;
+
+     &::-webkit-scrollbar-thumb {
+          background-color: transparent;
+          border-radius: 8px;
+     }
+     &:hover::-webkit-scrollbar-thumb {
+          background-color: ${props => props.theme.COLORS.ORANGE};
+     }
      
      background-color: ${({theme}) => theme.COLORS.BACKGROUND_900};
 
@@ -50,6 +62,10 @@ export const Menu = styled.ul`
 
      > li {
         margin-bottom: 24px;
+
+        &:last-child {
+          margin-bottom: 0px;
+        }
      }
 `;
 

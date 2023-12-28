@@ -35,9 +35,9 @@ export const Form = styled.div<IPropsTheme>`
 
         margin-bottom: 36px;
 
-        a {
+        button {
             font-size: 20px;
-            color: ${({theme}) => theme.COLORS.GRAY_100};
+            margin-bottom: -10px;
         }
     }
 `

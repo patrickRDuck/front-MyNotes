@@ -3,41 +3,119 @@ import { Container, Links, Content} from "./styles"
 import { Section } from "../../components/section"
 import { Tag } from "../../components/Tag"
 import { ButtonText } from "../../components/ButtonText"
+import { useParams, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { api } from "../../services"
+
+interface ITag {
+  id: string,
+  name: string,
+  user_id: string,
+  note_id: string
+}
+
+interface ILinks {
+  id: string,
+  url: string,
+  note_id: string,
+  created_at: string
+}
+
+interface INotes {
+  id: string,
+  title: string,
+  description: string,
+  user_id: string,
+  created_at: string,
+  updated_at: string,
+  tags: ITag[],
+  links?: ILinks[]
+}
 
 export function Details() {
+  const [data, setData] = useState<INotes | null>(null)
+
+  const params = useParams()
+  const navigate = useNavigate()
+
+  async function handleDelete() {
+    const confirm = window.confirm("Deseja realmente remover a nota?")
+
+    if(confirm) {
+      api.delete(`/notes/${params.id}`)
+      navigate(-1)
+    }
+  }
+
+
+  useEffect(() => {
+    async function fetchNote() {
+      const response = await api.get<INotes>(`/notes/${params.id}`)
+      setData(response.data)
+    }
+
+    fetchNote()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container>
       <Header />
 
-      <main>
-        <Content>
+      {
+        data &&
+        <main>
+          <Content>
 
-          <ButtonText title="Excluir nota" isactive='true'/>
+            <header>
+              <ButtonText 
+               title="Voltar"
+               isactive="false"
+               onClick={() => navigate(-1)} 
+              />
 
-          <h1>Introdução ao React</h1>
+              <ButtonText 
+               title="Excluir nota" 
+               isactive='true'
+               onClick={() => handleDelete()}
+              />
+            </header>
 
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates nemo fuga, sequi quibusdam aliquid iusto natus aperiam consequatur in, illo veniam? Officia deserunt quis, sapiente ad neque autem repellendus non?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo earum reiciendis doloremque eos, corporis cupiditate velit sapiente, quae ad, temporibus neque repellat. Doloribus adipisci recusandae magni explicabo exercitationem esse consectetur!
-          </p>
-        
-          <Section title="Links Úteis">
-              <Links>
-                <li> <a href="#">https://www.rockeseat.com.br/</a></li>
-                <li> <a href="#">https://www.rockeseat.com.br/</a></li>
-              </Links>
-          </Section>
 
-          <Section title="Marcadores">
+            <h1>{data.title}</h1>
 
-            <Tag title="express"/>
-            <Tag title="nodejs"/>
+            <p>
+              {data.description}
+            </p>
+          
+            <Section title="Links Úteis">
+                <Links>
+                  {
+                    data.links &&
+                    data.links.map((link) => (
+                      <li key={String(link.id)}>
+                        <a target="_blank" href={link.url}>
+                          {link.url}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </Links>
+            </Section>
 
-          </Section>
+            <Section title="Marcadores">
 
-        </Content>
-      </main>
+              {
+                data.tags.map((tag) => (
+                  <Tag key={String(tag.id)} title={tag.name}/>
+                ))
+              }
+            </Section>
+
+          </Content>
+        </main>
+      }
+
     </Container>
   )
 }

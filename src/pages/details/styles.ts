@@ -27,6 +27,7 @@ export const Links = styled.ul<IPropsTheme>`
 
         a {
             color: ${props => props.theme.COLORS.WHITE};
+            word-wrap: break-word;
         }
     }
 `;
@@ -37,6 +38,20 @@ export const Content = styled.div`
 
     display: flex;
     flex-direction: column;
+
+    > header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > button {
+            font-size: 18px;
+            
+            &:first-child {
+                margin-bottom: -5.5px;
+            }
+        }
+    }
 
     > button:first-child {
         align-self: end;
@@ -52,5 +67,7 @@ export const Content = styled.div`
         font-size: 16px;
         margin-top: 16px;
         text-align: justify;
+        word-wrap: break-word;
+        width: 100%;
     }
 `

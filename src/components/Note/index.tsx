@@ -2,11 +2,15 @@ import { Container } from "./styles";
 import { Tag } from '../Tag'
 
 interface ITag {
-    name: string
-    id: number
+    id: string,
+    name: string,
+    user_id?: string,
+    note_id?: string
 }
 
 interface IData {
+    user_id?: string
+    id: string
     title: string
     tags: ITag[]
 }
@@ -16,9 +20,11 @@ interface IProps {
     [key: string]: unknown
 }
 
-export function Note({data}: IProps) {
+
+
+export function Note({data}: IProps, onClick?: () => void) {
     return(
-        <Container to='/details/5'>
+        <Container to={`/details/${data.id}`} onClick={onClick}>
             <h1>{data.title}</h1>
 
             {

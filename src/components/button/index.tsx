@@ -2,12 +2,13 @@ import { Container } from "./styles";
 
 interface IPropsButton {
     text?: string
+    [key: string]: unknown
 }
 
-export function Button(props: IPropsButton) {
+export function Button({text, ...rest}: IPropsButton) {
     return (
-    <Container type="button">
-        {props.text ?? 'ola mundo'}
+    <Container type="button" {...rest}>
+        {text ?? 'ola mundo'}
     </Container>
     )
 }

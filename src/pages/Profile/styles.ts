@@ -3,6 +3,9 @@ import { IPropsTheme } from "../../styles/theme";
 
 export const Container = styled.div<IPropsTheme>`
     width: 100%;
+    height: 100vh;
+    padding-bottom: 3rem;
+    overflow-y: scroll;
 
     > header {
         width: 100%;
@@ -15,14 +18,19 @@ export const Container = styled.div<IPropsTheme>`
 
         padding: 0 124px;
 
-        svg {
-            color: ${({theme}) => theme.COLORS.GRAY_100};
-            font-size: 24px;
-            transition: all 250ms ease-out;
-        }
+        > button {
+            background: none;
+            border: none;
 
-        svg:hover {
-            color: ${({theme}) => theme.COLORS.ORANGE};
+            svg {
+                color: ${({theme}) => theme.COLORS.GRAY_100};
+                font-size: 24px;
+                transition: all 250ms ease-out;
+            }
+
+            svg:hover {
+                color: ${({theme}) => theme.COLORS.ORANGE};
+            }
         }
     }
 `

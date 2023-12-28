@@ -4,7 +4,7 @@ import { Container} from "./styles"
 interface IProps {
     isNew?: string
     value?: string
-    onClick?: () => unknown
+    onClick?: () => void
     [key: string]: unknown
 }
 
@@ -13,7 +13,7 @@ export function NoteItem({isNew = 'false', value = "", onClick, ...rest}: IProps
         <Container $isNew={isNew}>
             <input
              type="text" 
-             defaultValue={value} 
+             value={value} 
              readOnly={!(JSON.parse(isNew))} 
              {...rest}
             />

@@ -30,6 +30,7 @@ export const GlobalStyles = createGlobalStyle<IPropsTheme>`
 
         ::-webkit-scrollbar {
             width: 5px;
+            height: 100%;
         }
     }
 
