@@ -29,7 +29,7 @@ export function Header() {
 
                 <div>
                     <span>Bem vindo</span>
-                    <strong>{`${name[0]} ${name[name.length - 1]} `}</strong>
+                    <strong>{`${name[0]} ${name.length > 0 ? name[name.length - 1] : null} `}</strong>
                 </div>
             </Profile>
 
